@@ -285,7 +285,6 @@ class MAR(nn.Module):
 
             # mae encoder
             x = self.forward_mae_encoder(tokens, mask, class_embedding)
-
             # mae decoder
             z = self.forward_mae_decoder(x, mask)
 
@@ -320,6 +319,7 @@ class MAR(nn.Module):
             if not cfg == 1.0:
                 sampled_token_latent, _ = sampled_token_latent.chunk(2, dim=0)  # Remove null class samples
                 mask_to_pred, _ = mask_to_pred.chunk(2, dim=0)
+            import pdb; pdb.set_trace()
 
             cur_tokens[mask_to_pred.nonzero(as_tuple=True)] = sampled_token_latent
             tokens = cur_tokens.clone()
